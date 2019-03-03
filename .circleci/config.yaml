@@ -3,14 +3,14 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/python:3.6.1
+      - image: circleci/python:3.7.2
   working_directory: ~/repo
   steps:
     - checkout
       # Download and cache dependencies
     - restore_cache:
     keys:
-      - v1-dependencies-{{ checksum "pollsapi/requirements.txt" }}
+      - v1-dependencies-{{ checksum "polls/requirements.txt" }}
       # fallback to using the latest cache if no exact match is found
       - v1-dependencies-
 
@@ -19,7 +19,7 @@ jobs:
       command: |
         python3 -m venv venv
         . venv/bin/activate
-        pip install -r pollsapi/requirements.txt
+        pip install -r polls/requirements.txt
     
     - save_cache:
       paths:
@@ -30,7 +30,7 @@ jobs:
       name: run tests
       command: |
         . venv/bin/activate
-        cd pollsapi
+        cd polls
         python manage.py test
 
     - store_artifacts:

@@ -40,7 +40,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/PollingApps
     docker:
       - image: circleci/python:3.7.2
     steps:
